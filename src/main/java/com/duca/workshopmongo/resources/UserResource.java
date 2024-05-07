@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.duca.workshopmongo.domain.Post;
 import com.duca.workshopmongo.domain.User;
 import com.duca.workshopmongo.dto.UserDTO;
 import com.duca.workshopmongo.services.UserService;
@@ -59,5 +60,12 @@ public class UserResource {
 		
 		return ResponseEntity.noContent().build() ;
 				
+	}
+	
+	@GetMapping(value = "/{id}/posts")
+	public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
+		User obj = service.findById(id);
+		return ResponseEntity.ok().body(obj.getPosts());
+
 	}
 }
